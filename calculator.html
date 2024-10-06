@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="calculator.css">
+</head>
+
+<body>
+    <div idv="allcover">
+        <div id="cover">
+
+            <div id="alluppericons">
+                <div id="leftside">
+                    <div> <img src="icons8-calculator-48.png" style="width: 20px;"> </div>
+                    <div>Calculator</div>
+                </div>
+
+                <div id="rightsideicons">
+                    <div id="minimize"> <i class="fa-solid fa-minus"></i> </div>
+                    <div id="maximize"> <i class="fa-regular fa-square"></i> </div>
+                    <div id="close"><i class="fa-solid fa-xmark"></i> </div>
+                </div>
+            </div>
+
+            <div id="middleuppericons">
+                <div id="bar"><i class="fa-solid fa-bars"></i></div>
+                <b id="standard">Standard</b>
+                <div id="arrowleft"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                <div id="rightmiddle">
+                    <div id="rightarrow"><img src="icons8-history-24.png" alt=""></div>
+                </div>
+            </div>
+
+            <div id="inptcontainer">
+                <input id="input1">
+                <input id="input">
+            </div>
+
+            <div id="firstrowbtn">
+                <button id="btn">MC</button>
+                <button id="btn">MR</button>
+                <button id="btn">M+</button>
+                <button id="btn">M-</button>
+                <button id="btn">MS</button>
+                <button id="btn">M <i class="fa-solid fa-caret-down"></i></button>
+            </div>
+
+
+            <div id="secondbuttons">
+                <button>%</button>
+                <button onclick="clearit()">CE</button>
+                <button onclick="clea()">C</button>
+                <button onclick="dele()"><img src="icons8-clear-50.png" style="width: 20px;"></button>
+                <button>1/x</button>
+                <button>X2</button>
+                <button>2/X</button>
+                <button onclick="clic('/')"><img src="icons8-divide-30.png" style="width: 20px;"></button>
+                <button onclick="button(7)">7</button>
+                <button onclick="button(8)">8</button>
+                <button onclick="button(9)">9</button>
+                <button onclick="clic('*')">&times</button>
+                <button onclick="button(4)">4</button>
+                <button onclick="button(5)">5</button>
+                <button onclick="button(6)">6</button>
+                <button onclick="clic('-')">-</button>
+                <button onclick="button(1)">1</button>
+                <button onclick="button(2)">2</button>
+                <button onclick="button(3)">3</button>
+                <button onclick="clic('+')">+</button>
+                <button>+/-</button>
+                <button onclick="button(0)">0</button>
+                <button onclick="button('.')">.</button>
+                <button onclick="equa()">=</button>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>
+<script>
+
+    let minput = document.getElementById('input1')
+    let binput = document.getElementById('input')
+    remove = false
+    kept_value = ''
+    operator = ''
+
+    function button(numbers) {
+        if (remove == true) {
+
+            binput.value = ''
+            remove = false
+        }
+        binput.value += (numbers)
+    }
+    function clic(sign) {
+        if (operator) {
+            equa()
+        }
+        minput.value = binput.value + sign
+        remove = true
+        kept_value = binput.value
+        operator = sign
+
+    }
+
+    function equa() {
+        minput.value = kept_value + operator + binput.value
+
+        if (operator == '-') {
+            binput.value = kept_value - binput.value
+
+        }
+        if (operator == '+') {
+            binput.value = Number(kept_value) + parseInt(binput.value)
+
+        }
+        if (operator == '*') {
+            binput.value = kept_value * binput.value
+
+        }
+        if (operator == '/') {
+            binput.value = kept_value / binput.value
+
+        }
+    }
+
+    function dele() {
+        let value1 = binput.value
+        binput.value = value1.slice(0, -1)
+        // minput.value=value1.slice(0, -1)
+
+
+    }
+    function clearit() {
+        binput.value = ''
+        minput.value = ''
+        operator = ''
+    }
+    function clea() {
+        binput.value = ''
+    }
+</script>
